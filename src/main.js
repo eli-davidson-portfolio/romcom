@@ -49,3 +49,30 @@ function displayRandomBook() {
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+
+
+//Iteration-2 additional functions
+function showFormView() { }
+
+function showSavedView() { }
+
+function showHomeView() { }
+
+function hideFormView() { }
+
+function hideSavedView() { }
+
+function hideHomeView() { }
+
+function showRandomButton() { }
+
+function showSaveButton() { }
+
+function showFormButton() { }
+
+function hideRandomButton() { }
+
+function hideSaveButton() { }
+
+function hideFormButton() { }
+
