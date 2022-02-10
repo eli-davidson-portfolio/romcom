@@ -68,7 +68,11 @@ var currentCover;
 
 //Event listeners
 window.addEventListener('load', displayRandomBook)
+button.home.addEventListener('click', function(){})
 button.random.addEventListener('click', displayRandomBook)
+button.save.addEventListener('click', function (){})
+button.viewSaved.addEventListener('click', function (){})
+button.makeNew.addEventListener('click', function (){})
 
 //Functions
 function displayRandomBook() {
