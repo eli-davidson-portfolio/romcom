@@ -20,14 +20,25 @@
 [ ] When a user clicks the “Home” button, the “Show New Random Cover” and “Save Cover” buttons should be visible again
 */
 
-// Global variables - DOM
+// Global variables - DOM elements, current cover
 var bookImage = document.querySelector('.cover-image');
 var bookTitle = document.querySelector('.cover-title');
 var bookDescriptor1 = document.querySelector('.tagline-1');
 var bookDescriptor2 = document.querySelector('.tagline-2');
-var randomButton = document.querySelector('.random-cover-button')
 
-//Global variables = Data Arrays
+// Global variables - DOM elements, views
+var homeView = document.querySelector('.home-view');
+var savedView = document.querySelector('.saved-view');
+var formView = document.querySelector('.form-view');
+
+// Global variables - DOM elements, buttons
+var homeButton = document.querySelector('.home-button');
+var randomButton = document.querySelector('.random-cover-button');
+var saveCoverButton = document.querySelector('.save-cover-button');
+var viewSavedButton = document.querySelector('.view-saved-button');
+var makeNewButton = document.querySelector('.make-new-button');
+
+//Global variables - Data Arrays
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
@@ -49,7 +60,6 @@ function displayRandomBook() {
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
 
 //Iteration-2 additional functions
 function showFormView() { }
