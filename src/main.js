@@ -62,27 +62,24 @@ function getRandomIndex(array) {
 }
 
 //Iteration-2 additional functions
-function showFormView() { }
 
-function showSavedView() { }
-
+//Views
 function showHomeView() { }
-
-function hideFormView() { }
-
-function hideSavedView() { }
-
 function hideHomeView() { }
 
+function showFormView() { }
+function hideFormView() { }
+
+function showSavedView() { }
+function hideSavedView() { }
+
+//Buttons
 function showRandomButton() { }
-
-function showSaveButton() { }
-
-function showFormButton() { }
-
 function hideRandomButton() { }
 
+function showSaveButton() { }
 function hideSaveButton() { }
 
+function showFormButton() { }
 function hideFormButton() { }
 
