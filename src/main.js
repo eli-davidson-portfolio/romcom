@@ -67,14 +67,41 @@ var savedCovers = [
 var currentCover;
 
 //Event listeners
-window.addEventListener('load', displayRandomBook)
-button.home.addEventListener('click', function(){})
-button.random.addEventListener('click', displayRandomBook)
-button.save.addEventListener('click', function (){})
-button.viewSaved.addEventListener('click', function (){})
-button.makeNew.addEventListener('click', function (){})
+window.addEventListener('load', displayRandomBook);
+button.random.addEventListener('click', displayRandomBook);
+button.save.addEventListener('click', function (){});
 
-//Functions
+button.home.addEventListener('click', function(){
+  hideHomeButton()
+  hideSavedView()
+  hideFormView()
+  showRandomButton()
+  showSaveButton()
+  showFormButton()
+  showHomeView()
+});
+
+button.viewSaved.addEventListener('click', function (){
+  hideRandomButton();
+  hideSaveButton(); 
+  hideHomeView();
+  hideFormView();
+  showHomeButton()
+  showFormButton()
+  showSavedView();
+});
+
+button.makeNew.addEventListener('click', function (){
+  hideRandomButton();
+  hideSaveButton();
+  hideHomeView();
+  hideSavedView();
+  showHomeButton()
+  showSaveButton()
+  showFormView();
+});
+
+//Functions (maybe could be two function generateRandomCover, displayCover)
 function displayRandomBook() {
   book.image.src = covers[getRandomIndex(covers)];
   book.title.innerText = titles[getRandomIndex(titles)];
@@ -100,6 +127,9 @@ function showSavedView() { }
 function hideSavedView() { }
 
 //Buttons
+function showHomeButton() {}
+function hideHomeButton() {}
+
 function showRandomButton() { }
 function hideRandomButton() { }
 
