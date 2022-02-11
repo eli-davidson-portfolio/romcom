@@ -78,13 +78,15 @@ button.home.addEventListener('click', function(){
   hideFormView();
   showRandomButton();
   showSaveButton();
+  showSavedCoversButton();
   showFormButton();
   showHomeView();
 });
 
 button.viewSaved.addEventListener('click', function (){
   hideRandomButton();
-  hideSaveButton(); 
+  hideSaveButton();
+  hideSavedCoversButton();
   hideHomeView();
   hideFormView();
   showHomeButton();
@@ -95,10 +97,11 @@ button.viewSaved.addEventListener('click', function (){
 button.makeNew.addEventListener('click', function (){
   hideRandomButton();
   hideSaveButton();
+  hideFormButton();
   hideHomeView();
   hideSavedView();
   showHomeButton();
-  showSaveButton();
+  showSavedCoversButton();
   showFormView();
 });
 
@@ -149,6 +152,12 @@ function showSaveButton() {
 function hideSaveButton() {
   button.save.classList.add('hidden');
 }
+function showSavedCoversButton() {
+  button.viewSaved.classList.remove('hidden');
+}
+function hideSavedCoversButton() {
+  button.viewSaved.classList.add('hidden');
+}  
 function showFormButton() {
   button.makeNew.classList.remove('hidden');
 }
