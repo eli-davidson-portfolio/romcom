@@ -60,11 +60,12 @@ var button = {
   makeNew: document.querySelector('.make-new-button')
 }
 
-//Global variables - data arrays
-var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-];
-var currentCover;
+var data = {
+  currentCover: 'Easter Egg',
+  savedCovers: [
+    new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+  ]
+}
 
 //Event listeners
 window.addEventListener('load', displayRandomBook);
@@ -72,13 +73,13 @@ button.random.addEventListener('click', displayRandomBook);
 button.save.addEventListener('click', function (){});
 
 button.home.addEventListener('click', function(){
-  hideHomeButton()
-  hideSavedView()
-  hideFormView()
-  showRandomButton()
-  showSaveButton()
-  showFormButton()
-  showHomeView()
+  hideHomeButton();
+  hideSavedView();
+  hideFormView();
+  showRandomButton();
+  showSaveButton();
+  showFormButton();
+  showHomeView();
 });
 
 button.viewSaved.addEventListener('click', function (){
@@ -86,8 +87,8 @@ button.viewSaved.addEventListener('click', function (){
   hideSaveButton(); 
   hideHomeView();
   hideFormView();
-  showHomeButton()
-  showFormButton()
+  showHomeButton();
+  showFormButton();
   showSavedView();
 });
 
@@ -96,8 +97,8 @@ button.makeNew.addEventListener('click', function (){
   hideSaveButton();
   hideHomeView();
   hideSavedView();
-  showHomeButton()
-  showSaveButton()
+  showHomeButton();
+  showSaveButton();
   showFormView();
 });
 
@@ -109,33 +110,48 @@ function displayRandomBook() {
   book.descriptor2.innerText = descriptors[getRandomIndex(descriptors)];
   currentCover = new Cover(book.image.src, book.title.innerText, book.descriptor1.innerText, book.descriptor2.innerText);
 }
-
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
-//Iteration-2 additional functions
-
-//Views
-function showHomeView() { }
-function hideHomeView() { }
-
-function showFormView() { }
-function hideFormView() { }
-
-function showSavedView() { }
-function hideSavedView() { }
-
-//Buttons
-function showHomeButton() {}
-function hideHomeButton() {}
-
-function showRandomButton() { }
-function hideRandomButton() { }
-
-function showSaveButton() { }
-function hideSaveButton() { }
-
-function showFormButton() { }
-function hideFormButton() { }
-
+function showHomeView() {
+  view.home.classList.remove('hidden');
+}
+function hideHomeView() {
+  view.home.classList.add('hidden');
+}
+function showFormView() {
+  view.form.classList.remove('hidden');
+}
+function hideFormView() { 
+  view.form.classList.add('hidden');
+}
+function showSavedView() {
+  view.saved.classList.remove('hidden');
+}
+function hideSavedView() {
+  view.saved.classList.add('hidden');
+}
+function showHomeButton() {
+  button.home.classList.remove('hidden');
+}
+function hideHomeButton() {
+  button.home.classList.add('hidden');
+}
+function showRandomButton() { 
+  button.random.classList.remove('hidden');
+}
+function hideRandomButton() { 
+  button.random.classList.add('hidden');
+}
+function showSaveButton() { 
+  button.save.classList.remove('hidden');
+}
+function hideSaveButton() {
+  button.save.classList.add('hidden');
+}
+function showFormButton() {
+  button.makeNew.classList.remove('hidden');
+}
+function hideFormButton() { 
+  button.makeNew.classList.add('hidden');
+}
