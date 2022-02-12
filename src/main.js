@@ -3,14 +3,12 @@ var views = {
   saved: document.querySelector('.saved-view'),
   form: document.querySelector('.form-view')
 }
-
 var books = {
   image: document.querySelector('.cover-image'),
   title: document.querySelector('.cover-title'),
   tagline1: document.querySelector('.tagline-1'),
   tagline2: document.querySelector('.tagline-2')
 }
-
 var buttons = {
   home: document.querySelector('.home-button'),
   random: document.querySelector('.random-cover-button'),
@@ -19,152 +17,91 @@ var buttons = {
   navMakeNew: document.querySelector('.make-new-button'),
   createNew: document.querySelector('.create-new-book-button')
 }
-
 var inputs = {
   image: document.querySelector('#cover'),
   title: document.querySelector('#title'),
   tagline1: document.querySelector('#descriptor1'),
   tagline2: document.querySelector('#descriptor2')
-
 }
-
-var covers2 = {
-  currentCover: 'Easter Egg',
+var coverData = {
+  currentCover: new Cover("https://tinyurl.com/yckmnrd9", "Easter egg", "hide", "seek"),
   savedCovers: [
     new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-  ]
+  ],
+  save: function() {
+    if (this.currentCover !== this.savedCovers[0]) {
+      this.savedCovers.unshift(this.currentCover);
+    }
+    console.log(this.savedCovers)
+  }
 }
 
 window.addEventListener('load', displayRandomCover);
 buttons.random.addEventListener('click', displayRandomCover);
 buttons.save.addEventListener('click', saveCurrentCover);
-buttons.home.addEventListener('click', goToHome);
-buttons.viewSaved.addEventListener('click', goToSaved);
-buttons.navMakeNew.addEventListener('click', goToNew);
+buttons.home.addEventListener('click', viewHome);
+buttons.viewSaved.addEventListener('click', viewSaved);
+buttons.navMakeNew.addEventListener('click', viewNew);
 buttons.createNew.addEventListener('click', displayNewCover);
 
-
+function createNewCover() {
+  return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
+}
+function createRandomCover() {
+  return new Cover(getRandomElement(covers), getRandomElement(titles), getRandomElement(descriptors), getRandomElement(descriptors));
+}
 function getRandomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
-
-function showHomeView() {
-  views.home.classList.remove('hidden');
-}
-function hideHomeView() {
-  views.home.classList.add('hidden');
-}
-function showFormView() {
-  views.form.classList.remove('hidden');
-}
-function hideFormView() {
-  views.form.classList.add('hidden');
-}
-function showSavedView() {
-  views.saved.classList.remove('hidden');
-}
-function hideSavedView() {
-  views.saved.classList.add('hidden');
-}
-function showHomeButton() {
-  buttons.home.classList.remove('hidden');
-}
-function hideHomeButton() {
-  buttons.home.classList.add('hidden');
-}
-function showRandomButton() {
-  buttons.random.classList.remove('hidden');
-}
-function hideRandomButton() {
-  buttons.random.classList.add('hidden');
-}
-function showSaveButton() {
-  buttons.save.classList.remove('hidden');
-}
-function hideSaveButton() {
-  buttons.save.classList.add('hidden');
-}
-function showSavedCoversButton() {
-  buttons.viewSaved.classList.remove('hidden');
-}
-function hideSavedCoversButton() {
-  buttons.viewSaved.classList.add('hidden');
-}
-function showFormButton() {
-  buttons.navMakeNew.classList.remove('hidden');
-}
-function hideFormButton() {
-  buttons.navMakeNew.classList.add('hidden');
-}
-
-function displayRandomCover() {
-covers2.currentCover = displayCover(createRandomCover());
-}
-
 function displayNewCover() {
   event.preventDefault();
-  goToHome();
-covers2.currentCover = displayCover(createNewCover());
+  viewHome();
+  coverData.currentCover = displayCover(createNewCover());
 }
-
-function displayCover(newCover) {
- books.image.src = newCover.cover
- books.title.innerText = newCover.title
- books.tagline1.innerText = newCover.tagline1
- books.tagline2.innerText = newCover.tagline2
- return newCover;
+function displayRandomCover() {
+  coverData.currentCover = displayCover(createRandomCover());
 }
-
-function createRandomCover() {
-return new Cover(getRandomElement(covers), getRandomElement(titles), getRandomElement(descriptors), getRandomElement(descriptors));
+function displayCover(cover) {
+  books.image.src = cover.cover
+  books.title.innerText = cover.title
+  books.tagline1.innerText = cover.tagline1
+  books.tagline2.innerText = cover.tagline2
+  return cover;
 }
-
-
-function createNewCover() {
-return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
-}
-
 function saveCurrentCover() {
-
+  coverData.save()
+}
+function viewHome() {
+  hide(buttons);
+  hide(views);
+  show(buttons.random);
+  show(buttons.save);
+  show(buttons.viewSaved);
+  show(buttons.navMakeNew);
+  show(views.home);
+}
+function viewSaved() {
+  hide(buttons);
+  hide(views);
+  show(buttons.home);
+  show(buttons.navMakeNew);
+  show(views.saved);
+}
+function viewNew() {
+  hide(buttons);
+  hide(views);
+  show(buttons.home);
+  show(buttons.viewSaved);
+  show(buttons.navMakeNew);
+  show(views.form);
+}
+function hide(object) {
+  var objectKeys = Object.keys(object);
+  for (var i = 0; i < objectKeys.length; i++) {
+    object[objectKeys[i]].classList.add('hidden')
+  }
+}
+function show(object) {
+  object.classList.remove('hidden');
 }
 
-function goToHome() {
-  hideHomeButton();
-  hideSavedView();
-  hideFormView();
-  showRandomButton();
-  showSaveButton();
-  showSavedCoversButton();
-  showFormButton();
-  showHomeView();
-}
-
-function goToSaved() {
-  hideRandomButton();
-  hideSaveButton();
-  hideSavedCoversButton();
-  hideHomeView();
-  hideFormView();
-  showHomeButton();
-  showFormButton();
-  showSavedView();
-}
-
-function goToNew() {
-  hideRandomButton();
-  hideSaveButton();
-  hideFormButton();
-  hideHomeView();
-  hideSavedView();
-  clearForm();
-  showHomeButton();
-  showSavedCoversButton();
-  showFormView();
-}
-
-function clearForm() {
-  inputs.image.value = '';
-  inputs.title.value = '';
-  inputs.tagline1.value = '';
-  inputs.tagline2.value = '';
-}
