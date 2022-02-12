@@ -1,44 +1,3 @@
-/*Iteration-2 REQUIREMENTS (for PR Review)
-[ ] When a user clicks the “Make Your Own Cover” button, we should see the form, and the homepage view should be hidden
-
-[ ] When the Form view is visible, the “Show New Random Cover” and “Save Cover” buttons should be hidden
-
-[ ] When the Form view is visible, the “Home” button should be visible
-
-[ ] When a user clicks the “View Saved Covers” button, we should see the saved covers section, and the homepage view should be hidden
-
-[ ] When the Saved Covers view is visible, the “Show New Random Cover” and “Save Cover” buttons should be hidden
-
-[ ] When the Saved Covers view is visible, the “Home” button should be visible
-
-[ ] In summary: Be able to switch between the three views (main poster, form, and saved posters) on the correct button clicks
-
-[ ] When a user clicks the “Home” button, we should only see the Home section
-
-[ ] When a user clicks the “Home” button, the home button should be hidden
-
-[ ] When a user clicks the “Home” button, the “Show New Random Cover” and “Save Cover” buttons should be visible again
-*/
-/* // Deprocated Global variables - DOM elements, current cover
-// var booksImage = document.querySelector('.cover-image');
-// var booksTitle = document.querySelector('.cover-title');
-// var bookstagline1 = document.querySelector('.tagline-1');
-// var bookstagline2 = document.querySelector('.tagline-2');
-
-// // Global variables - DOM elements, views
-// var homeView = document.querySelector('.home-view');
-// var savedView = document.querySelector('.saved-view');
-// var formView = document.querySelector('.form-view');
-
-// // Global variables - DOM elements, buttons
-// var homeButton = document.querySelector('.home-button');
-// var randomButton = document.querySelector('.random-cover-button');
-// var saveCoverButton = document.querySelector('.save-cover-button');
-// var viewSavedButton = document.querySelector('.view-saved-button');
-// var makeNewButton = document.querySelector('.make-new-button');
-*/
-
-// Global variables - DOM elements
 var views = {
   home: document.querySelector('.home-view'),
   saved: document.querySelector('.saved-view'),
@@ -61,6 +20,14 @@ var buttons = {
   createNew: document.querySelector('.create-new-book-button')
 }
 
+var inputs = {
+  image: document.querySelector('#cover'),
+  title: document.querySelector('#title'),
+  tagline1: document.querySelector('#descriptor1'),
+  tagline2: document.querySelector('#descriptor2')
+
+}
+
 var covers2 = {
   currentCover: 'Easter Egg',
   savedCovers: [
@@ -68,23 +35,14 @@ var covers2 = {
   ]
 }
 
-//Event listeners
 window.addEventListener('load', displayRandomCover);
 buttons.random.addEventListener('click', displayRandomCover);
 buttons.save.addEventListener('click', saveCurrentCover);
 buttons.home.addEventListener('click', goToHome);
 buttons.viewSaved.addEventListener('click', goToSaved);
 buttons.navMakeNew.addEventListener('click', goToNew);
-buttons.createNew.addEventListener('click', createNewCover);
+buttons.createNew.addEventListener('click', displayNewCover);
 
-//Functions (maybe could be two function generateRandomCover, displayCover)
-// function displayRandombook() {
-//   books.image.src = getRandomElement(covers);
-//   books.title.innerText = getRandomElement(titles);
-//   books.tagline1.innerText = getRandomElement(descriptors);
-//   books.tagline2.innerText = getRandomElement(descriptors);
-//   covers.currentCover = new Cover(books.image.src, books.title.innerText, books.tagline1.innerText, books.tagline2.innerText);
-// }
 
 function getRandomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -133,17 +91,19 @@ function hideSavedCoversButton() {
   buttons.viewSaved.classList.add('hidden');
 }
 function showFormButton() {
-  buttons.makeNew.classList.remove('hidden');
+  buttons.navMakeNew.classList.remove('hidden');
 }
 function hideFormButton() {
-  buttons.makeNew.classList.add('hidden');
+  buttons.navMakeNew.classList.add('hidden');
 }
 
 function displayRandomCover() {
-currentCover = displayCover(createRandomCover());
+covers2.currentCover = displayCover(createRandomCover());
 }
 
-function displayUserCover() {
+function displayNewCover() {
+  event.preventDefault();
+  goToHome();
 covers2.currentCover = displayCover(createNewCover());
 }
 
@@ -161,7 +121,7 @@ return new Cover(getRandomElement(covers), getRandomElement(titles), getRandomEl
 
 
 function createNewCover() {
-return new Cover(userCover, userTitle, userDesc1, userDesc2);
+return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
 }
 
 function saveCurrentCover() {
@@ -196,7 +156,15 @@ function goToNew() {
   hideFormButton();
   hideHomeView();
   hideSavedView();
+  clearForm();
   showHomeButton();
   showSavedCoversButton();
   showFormView();
+}
+
+function clearForm() {
+  inputs.image.value = '';
+  inputs.title.value = '';
+  inputs.tagline1.value = '';
+  inputs.tagline2.value = '';
 }
