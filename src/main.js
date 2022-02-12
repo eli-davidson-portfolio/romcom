@@ -104,3 +104,4 @@ function hide(object) {
 function show(object) {
   object.classList.remove('hidden');
 }
+
