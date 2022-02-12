@@ -93,6 +93,7 @@ function viewNew() {
   show(buttons.home);
   show(buttons.viewSaved);
   show(buttons.navMakeNew);
+  show(buttons.createNew);
   show(views.form);
 }
 function hide(object) {
@@ -104,4 +105,3 @@ function hide(object) {
 function show(object) {
   object.classList.remove('hidden');
 }
-
