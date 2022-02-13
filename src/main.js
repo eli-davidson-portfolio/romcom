@@ -110,15 +110,14 @@ function show(object) {
 }
 
 function showSavedCovers() {
-  // savedCoversDisplay.innerHTML = '';
   for (var i = 0; i < coverData.savedCovers.length; i++) {
     savedCoversDisplay.innerHTML +=
-    `<section class=“mini-cover”>
-        <img class=“cover-image” src=${coverData.savedCovers[i].cover}>
-        <h2 class=“cover-title”>${coverData.savedCovers[i].title}</h2>
-        <h3 class=“tagline”>A tale of <span class=“tagline-1">${coverData.savedCovers[i].tagline1}</span> and <span class=“tagline-2”>${coverData.savedCovers[i].tagline2}</span></h3>
-        <img class=“price-tag” src=“./assets/price.png”>
-        <img class=“overlay” src=“./assets/overlay.png”>
+      `<section class="mini-cover">
+        <img class="cover-image" src=${coverData.savedCovers[i].cover}>
+        <h2 class="cover-title">${coverData.savedCovers[i].title}</h2>
+        <h3 class="tagline">A tale of <span class="tagline-1">${coverData.savedCovers[i].tagline1}</span> and <span class="tagline-2">${coverData.savedCovers[i].tagline2}</span></h3>
+        <img class="price-tag" src="./assets/price.png">
+        <img class="overlay" src="./assets/overlay.png">
       </section>`
   }
 }
