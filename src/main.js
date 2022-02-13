@@ -22,6 +22,7 @@ var buttons = {
 
 var savedCoversDisplay = document.querySelector('.saved-covers-section');
 
+
 var inputs = {
   image: document.querySelector('#cover'),
   title: document.querySelector('#title'),
@@ -41,6 +42,8 @@ var coverData = {
   }
 }
 
+
+
 window.addEventListener('load', displayRandomCover);
 buttons.random.addEventListener('click', displayRandomCover);
 buttons.save.addEventListener('click', saveCurrentCover);
@@ -48,6 +51,16 @@ buttons.home.addEventListener('click', viewHome);
 buttons.viewSaved.addEventListener('click', viewSaved);
 buttons.navMakeNew.addEventListener('click', viewNew);
 buttons.createNew.addEventListener('click', displayNewCover);
+document.addEventListener('dblclick', function (click) {
+  //when the user double clicks, the function takes in the event, which I named click
+  //The click.target is what the user clicked on
+  //If the user clicked on an overlay (which is invisable but on top of all the RomCom covers) &&
+  //If the overlay has an ID (which only saved covers do) (see line 157)
+  //Then it will call deleteSavedCover, passing the ID)
+  if (click.target.className === 'overlay' && click.target.id) {
+    deleteSavedCover(click.target.id)
+  }
+});
 
 function createNewCover() {
   return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
@@ -58,7 +71,7 @@ function saveNewCover(cover) {
   titles.unshift(inputs.title.value)
   descriptors.unshift(inputs.tagline1.value)
   descriptors.unshift(inputs.tagline2.value)
-  coverData.savedCovers.unshift(cover)
+  coverData.savedCovers.push(cover)
   return cover
 }
 
@@ -141,8 +154,17 @@ function showSavedCovers() {
         <h2 class="cover-title">${coverData.savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${coverData.savedCovers[i].tagline1}</span> and <span class="tagline-2">${coverData.savedCovers[i].tagline2}</span></h3>
         <img class="price-tag" src="./assets/price.png">
-        <img class="overlay" src="./assets/overlay.png">
+        <img class="overlay" id=${i} src="./assets/overlay.png">
       </section>`
   }
   savedCoversDisplay.innerHTML = savedCoversHTML
+}
+
+function deleteSavedCover (targetID) {
+  //The ID passed in is the index of the saved cover within the saved covers array
+  //In other words it's coverData.savedCovers[targetID]
+  //the target cover can be removed with a simple splice now that we know at what index it is in the array
+   coverData.savedCovers.splice(targetID, 1);
+  //Once the cover is removed from the array, the saved covers view is refreshed with the below function call
+   showSavedCovers();
 }
