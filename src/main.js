@@ -34,7 +34,6 @@ var coverData = {
     if (this.currentCover !== this.savedCovers[0]) {
       this.savedCovers.unshift(this.currentCover);
     }
-    console.log(this.savedCovers)
   }
 }
 
@@ -49,16 +48,29 @@ buttons.createNew.addEventListener('click', displayNewCover);
 function createNewCover() {
   return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
 }
+
+
 function createRandomCover() {
   return new Cover(getRandomElement(covers), getRandomElement(titles), getRandomElement(descriptors), getRandomElement(descriptors));
 }
+
+
 function getRandomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
+function saveNewCover(cover) {
+  covers.unshift(inputs.image.value)
+  titles.unshift(inputs.title.value)
+  descriptors.unshift(inputs.tagline1.value)
+  descriptors.unshift(inputs.tagline2.value)
+  coverData.savedCovers.unshift(cover)
+  return cover
+}
+
 function displayNewCover() {
   event.preventDefault();
   viewHome();
-  coverData.currentCover = displayCover(createNewCover());
+  coverData.currentCover = displayCover(saveNewCover(createNewCover()));
 }
 function displayRandomCover() {
   coverData.currentCover = displayCover(createRandomCover());
@@ -110,8 +122,9 @@ function show(object) {
 }
 
 function showSavedCovers() {
+  var savedCoversHTML = ''
   for (var i = 0; i < coverData.savedCovers.length; i++) {
-    savedCoversDisplay.innerHTML +=
+    savedCoversHTML +=
       `<section class="mini-cover">
         <img class="cover-image" src=${coverData.savedCovers[i].cover}>
         <h2 class="cover-title">${coverData.savedCovers[i].title}</h2>
@@ -120,4 +133,5 @@ function showSavedCovers() {
         <img class="overlay" src="./assets/overlay.png">
       </section>`
   }
+  savedCoversDisplay.innerHTML = savedCoversHTML
 }
