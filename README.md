@@ -34,7 +34,6 @@ RomCom was the project to gain better understanding in writing JavaScript code. 
 ![Home View](https://user-images.githubusercontent.com/94997199/153774523-7de747d9-670a-4dba-9fd8-c9abb5a75b3e.png)
 
 ### Saved View
-![Saved Covers View](
-https://user-images.githubusercontent.com/94997199/153774527-0276f968-a24e-49f3-a44c-23e7827bcea0.png")
+![Saved Covers View](https://user-images.githubusercontent.com/94997199/153774527-0276f968-a24e-49f3-a44c-23e7827bcea0.png")
 ### Create New Cover View
 ![New View](https://user-images.githubusercontent.com/94997199/153774522-6ecfffcf-3c16-4de9-9501-75517f7e0410.png)
