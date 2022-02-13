@@ -3,12 +3,14 @@ var views = {
   saved: document.querySelector('.saved-view'),
   form: document.querySelector('.form-view')
 }
+
 var books = {
   image: document.querySelector('.cover-image'),
   title: document.querySelector('.cover-title'),
   tagline1: document.querySelector('.tagline-1'),
   tagline2: document.querySelector('.tagline-2')
 }
+
 var buttons = {
   home: document.querySelector('.home-button'),
   random: document.querySelector('.random-cover-button'),
@@ -17,6 +19,7 @@ var buttons = {
   navMakeNew: document.querySelector('.make-new-button'),
   createNew: document.querySelector('.create-new-book-button')
 }
+
 var savedCoversDisplay = document.querySelector('.saved-covers-section');
 
 var inputs = {
@@ -25,6 +28,7 @@ var inputs = {
   tagline1: document.querySelector('#descriptor1'),
   tagline2: document.querySelector('#descriptor2')
 }
+
 var coverData = {
   currentCover: new Cover("https://tinyurl.com/yckmnrd9", "Easter egg", "hide", "seek"),
   savedCovers: [
@@ -49,15 +53,6 @@ function createNewCover() {
   return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
 }
 
-
-function createRandomCover() {
-  return new Cover(getRandomElement(covers), getRandomElement(titles), getRandomElement(descriptors), getRandomElement(descriptors));
-}
-
-
-function getRandomElement(array) {
-  return array[Math.floor(Math.random() * array.length)];
-}
 function saveNewCover(cover) {
   covers.unshift(inputs.image.value)
   titles.unshift(inputs.title.value)
@@ -72,9 +67,19 @@ function displayNewCover() {
   viewHome();
   coverData.currentCover = displayCover(saveNewCover(createNewCover()));
 }
+
+function getRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+function createRandomCover() {
+  return new Cover(getRandomElement(covers), getRandomElement(titles), getRandomElement(descriptors), getRandomElement(descriptors));
+}
+
 function displayRandomCover() {
   coverData.currentCover = displayCover(createRandomCover());
 }
+
 function displayCover(cover) {
   books.image.src = cover.cover
   books.title.innerText = cover.title
@@ -82,9 +87,22 @@ function displayCover(cover) {
   books.tagline2.innerText = cover.tagline2
   return cover;
 }
+
 function saveCurrentCover() {
   coverData.save()
 }
+
+function hide(object) {
+  var objectKeys = Object.keys(object);
+  for (var i = 0; i < objectKeys.length; i++) {
+    object[objectKeys[i]].classList.add('hidden')
+  }
+}
+
+function show(object) {
+  object.classList.remove('hidden');
+}
+
 function viewHome() {
   hide(buttons);
   hide(views);
@@ -94,14 +112,7 @@ function viewHome() {
   show(buttons.navMakeNew);
   show(views.home);
 }
-function viewSaved() {
-  hide(buttons);
-  hide(views);
-  showSavedCovers();
-  show(buttons.home);
-  show(buttons.navMakeNew);
-  show(views.saved);
-}
+
 function viewNew() {
   hide(buttons);
   hide(views);
@@ -111,14 +122,14 @@ function viewNew() {
   show(buttons.createNew);
   show(views.form);
 }
-function hide(object) {
-  var objectKeys = Object.keys(object);
-  for (var i = 0; i < objectKeys.length; i++) {
-    object[objectKeys[i]].classList.add('hidden')
-  }
-}
-function show(object) {
-  object.classList.remove('hidden');
+
+function viewSaved() {
+  hide(buttons);
+  hide(views);
+  showSavedCovers();
+  show(buttons.home);
+  show(buttons.navMakeNew);
+  show(views.saved);
 }
 
 function showSavedCovers() {
