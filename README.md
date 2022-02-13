@@ -28,3 +28,4 @@ RomCom was the project to gain better understanding in writing JavaScript code. 
 5. On clicking the make your own cover button, a form is displayed that accepts custom cover data including a custom image, title, and descriptors.
 6. On clicking the make my book button, the users inputs are saved and made available to future. random cover generation; additionally, the new cover is displayed on the home screen.
 7. On double clicking any saved cover, the cover is deleted. 
+
