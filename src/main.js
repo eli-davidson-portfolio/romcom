@@ -48,18 +48,23 @@ buttons.home.addEventListener('click', viewHome);
 buttons.viewSaved.addEventListener('click', viewSaved);
 buttons.navMakeNew.addEventListener('click', viewNew);
 buttons.createNew.addEventListener('click', displayNewCover);
+document.addEventListener('dblclick', function (click) {
+  if (click.target.className === 'overlay' && click.target.id) {
+    deleteSavedCover(click.target.id);
+  }
+});
 
 function createNewCover() {
   return new Cover(inputs.image.value, inputs.title.value, inputs.tagline1.value, inputs.tagline2.value);
 }
 
 function saveNewCover(cover) {
-  covers.unshift(inputs.image.value)
-  titles.unshift(inputs.title.value)
-  descriptors.unshift(inputs.tagline1.value)
-  descriptors.unshift(inputs.tagline2.value)
-  coverData.savedCovers.unshift(cover)
-  return cover
+  covers.unshift(inputs.image.value);
+  titles.unshift(inputs.title.value);
+  descriptors.unshift(inputs.tagline1.value);
+  descriptors.unshift(inputs.tagline2.value);
+  coverData.savedCovers.push(cover);
+  return cover;
 }
 
 function displayNewCover() {
@@ -81,21 +86,21 @@ function displayRandomCover() {
 }
 
 function displayCover(cover) {
-  books.image.src = cover.cover
-  books.title.innerText = cover.title
-  books.tagline1.innerText = cover.tagline1
-  books.tagline2.innerText = cover.tagline2
+  books.image.src = cover.cover;
+  books.title.innerText = cover.title;
+  books.tagline1.innerText = cover.tagline1;
+  books.tagline2.innerText = cover.tagline2;
   return cover;
 }
 
 function saveCurrentCover() {
-  coverData.save()
+  coverData.save();
 }
 
 function hide(object) {
   var objectKeys = Object.keys(object);
   for (var i = 0; i < objectKeys.length; i++) {
-    object[objectKeys[i]].classList.add('hidden')
+    object[objectKeys[i]].classList.add('hidden');
   }
 }
 
@@ -141,8 +146,13 @@ function showSavedCovers() {
         <h2 class="cover-title">${coverData.savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${coverData.savedCovers[i].tagline1}</span> and <span class="tagline-2">${coverData.savedCovers[i].tagline2}</span></h3>
         <img class="price-tag" src="./assets/price.png">
-        <img class="overlay" src="./assets/overlay.png">
-      </section>`
+        <img class="overlay" id=${i} src="./assets/overlay.png">
+      </section>`;
   }
-  savedCoversDisplay.innerHTML = savedCoversHTML
+  savedCoversDisplay.innerHTML = savedCoversHTML;
+}
+
+function deleteSavedCover (targetID) {
+   coverData.savedCovers.splice(targetID, 1);
+   showSavedCovers();
 }

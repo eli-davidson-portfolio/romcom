@@ -29,3 +29,11 @@ RomCom was the project to gain better understanding in writing JavaScript code. 
 6. On clicking the make my book button, the users inputs are saved and made available to future. random cover generation; additionally, the new cover is displayed on the home screen.
 7. On double clicking any saved cover, the cover is deleted. 
 
+## Screenshots
+### Home View
+![Home View](https://user-images.githubusercontent.com/94997199/153774523-7de747d9-670a-4dba-9fd8-c9abb5a75b3e.png)
+
+### Saved View
+![Saved Covers View](https://user-images.githubusercontent.com/94997199/153774527-0276f968-a24e-49f3-a44c-23e7827bcea0.png)
+### Create New Cover View
+![New View](https://user-images.githubusercontent.com/94997199/153774522-6ecfffcf-3c16-4de9-9501-75517f7e0410.png)
