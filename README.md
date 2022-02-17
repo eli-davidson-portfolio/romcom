@@ -13,7 +13,7 @@
 - JavaScript
 
 ## Overview
-RomCom was the project to gain better understanding in writing JavaScript code. It creates custom romantic comedies. Access it by clicking [Here!](https://github.com/lourdesbnts/romcom)
+RomCom was the project to gain better understanding in writing JavaScript code. It creates custom romantic comedies. Access it by clicking [Here!](https://elleshadow.github.io/romcom/)
 
 ## Installation Instruction's
 1. Clone this repository into your terminal.
